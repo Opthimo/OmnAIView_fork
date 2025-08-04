@@ -40,6 +40,7 @@ export class GraphSelectionService {
   /**
    * Computed selection rectangle coordinates covering full graph height
    * Returns null if no selection is active
+   * Coordinates are relative to the SVG coordinate system (including margins)
    */
   readonly selectionRect = computed(() => {
     const startX = this._selectionStartX();
@@ -49,7 +50,7 @@ export class GraphSelectionService {
     
     return {
       x: Math.min(startX, endX),
-      y: 0, 
+      y: 0,  // Will be positioned correctly in template relative to plot area
       width: Math.abs(endX - startX),
       height: this._graphHeight() 
     } as SelectionRect;
